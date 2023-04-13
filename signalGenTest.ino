@@ -23,7 +23,7 @@ double amplitude_multiplier = 1;
 void loop(){
     /populate array
 for(int i = 0; i < ARRAY_SIZE; i++){
-	ARRAY_SIZE[i] = data_point_multiplier * i;
+	ARRAY_SIZE[i] = i;
 }
 
 //pins for output siganls
@@ -35,22 +35,22 @@ for(int i = 0; i < ARRAY_SIZE; i++){
 
 //generate first quarter of wave
 for (int i = 0; i < ARRAY_SIZE; i++){
-	pulse_out(data_points[i]);
+	pulse_out(data_points[i * data_point_multiplier]);
 }
 
 //generate second quarter of wave
 for (int i = ARRAY_SIZE; i > 0; i--){
-	pulse_out(data_points[i]);
+	pulse_out(data_points[i * data_point_multiplier]);
 }
 
 //generate third quarter of wave
 for (int i = 0; i < ARRAY_SIZE; i++){
-	pulse_out(NEGATION_MULTIPLIER * data_points[i]);
+	pulse_out(NEGATION_MULTIPLIER * data_points[i * data_point_multiplier]);
 }
 
 //generate fourth quarter of wave
 for (int i = ARRAY_SIZE; i > 0; i--){
-	pulse_out(NEGATION_MULTIPLIER * data_points[i]);
+	pulse_out(NEGATION_MULTIPLIER * data_points[i * data_point_multiplier]);
 }
 
 //615 mili secs between each demo
