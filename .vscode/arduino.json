@@ -1,3 +1,5 @@
 {
-    "board": "arduino:avr:nano"
+    "board": "adafruit:samd:adafruit_itsybitsy_m0",
+    "configuration": "opt=small,usbstack=arduino,debug=off",
+    "programmer": "adafruit:adafruit_jlink"
 }
