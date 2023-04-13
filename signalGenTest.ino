@@ -17,8 +17,9 @@ const double WAVE_PERIOD = 615E-3;
 float a_type[6] = {1, 0.5, 0.25, 0.125, 10, 0};
 float s_type[3] = {1.5, 2, 2};
 double data_points[ARRAY_SIZE] = {0};
-double data_point_multiplier = QUARTER_DEGREE_VAL/ARRAY_SIZE;
+double data_point_multiplier = QUARTER_DEGREE_VAL / ARRAY_SIZE;
 double amplitude_multiplier = 1;
+double quarter_period = WAVE_PERIOD / 4;
 int antenna_pin = 26;
 
 //set pin as output pin
