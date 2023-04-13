@@ -28,7 +28,8 @@ void loop() {
 }
 
 void setPins() {
-    pinMode(transData, OUTPUT);
+    pinMode(transDataSCL, OUTPUT);
+    pinMode(transDataSDA, OUTPUT);
     pinMode(Atype2, INPUT);
     pinMode(Atype1, INPUT);
     pinMode(Atype0, INPUT);
