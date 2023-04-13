@@ -7,3 +7,10 @@ Required Functionality:
     - Sine wave generation
 */
 
+void setup(){
+
+}
+
+void loop(){
+    
+}
