@@ -1,4 +1,5 @@
-int transData = 14;
+int transDataSCL = 27;
+int transDataSDA = 26;
 int Atype2 = 13;
 int Atype1 = 12; // seems to be negated
 int Atype0 = 11;
