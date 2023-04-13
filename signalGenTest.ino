@@ -22,7 +22,7 @@ double amplitude_multiplier = 1;
 }
 
 void loop(){
-    /populate array
+    //populate array
 for(int i = 0; i < ARRAY_SIZE; i++){
 	ARRAY_SIZE[i] = i;
 }
