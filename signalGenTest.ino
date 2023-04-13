@@ -13,7 +13,8 @@ const int ARRAY_SIZE = 256;
 const int NEGATION_MULTIPLIER = -1;
 const int QUARTER_DEGREE_VAL = 90;
 const double PI = 3.14159265;
-
+float a_type[6] = {1, 0.5, 0.25, 0.125, 10, 0};
+float s_type[3] = {1.5, 2, 2};
 double data_points[ARRAY_SIZE] = {0};
 double data_point_multiplier = QUARTER_DEGREE_VAL/ARRAY_SIZE;
 double amplitude_multiplier = 1;
