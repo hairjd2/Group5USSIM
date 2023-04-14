@@ -16,6 +16,8 @@ int Stype;
 
 bool isFro = false;
 
+// int stationType[3][3] = {{-10, }, {-10, }, {3, }}
+
 void setup() {
 // TODO: setup the pins we want to watch
     int Atype = 5;
