@@ -14,6 +14,9 @@ const int NEGATION_MULTIPLIER = -1;
 const int QUARTER_DEGREE_VAL = 90;
 const double PI = 3.14159265;
 const double WAVE_PERIOD = 615E-3;
+const int STRAIGHT_ANGLE = 180;
+
+
 float a_type[6] = {1, 0.5, 0.25, 0.125, 10, 0};
 float s_type[3] = {1.5, 2, 2};
 double data_points[ARRAY_SIZE] = {0};
@@ -21,6 +24,7 @@ double data_point_multiplier = QUARTER_DEGREE_VAL / ARRAY_SIZE;
 double amplitude_multiplier = 1;
 double quarter_period = WAVE_PERIOD / 4;
 int antenna_pin = 26;
+double radian_converter = PI / STRAIGHT_ANGLE;
 
 //set pin as output pin
 pinMode(antenna_pin,OUTPUT);
@@ -34,7 +38,8 @@ digitalWrite(antenna_pin,HIGH);
 void loop(){
     //populate array
 for(int i = 0; i < ARRAY_SIZE; i++){
-	ARRAY_SIZE[i] = i;
+	//note sine function takes argument 
+	ARRAY_SIZE[i] = sin(i * data_point_multiplier * radian_converter);
 }
 
 //pins for output siganls
