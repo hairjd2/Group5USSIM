@@ -6,9 +6,6 @@
 Required Functionality:
     - Sine wave generation
 */
-
-void setup(){
-    
 const int ARRAY_SIZE = 256;
 const int NEGATION_MULTIPLIER = -1;
 const int QUARTER_DEGREE_VAL = 90;
@@ -26,6 +23,10 @@ double quarter_period = WAVE_PERIOD / 4;
 int antenna_pin = 26;
 double radian_converter = PI / STRAIGHT_ANGLE;
 
+void setup(){
+    
+
+
 //set pin as output pin
 pinMode(antenna_pin,OUTPUT);
 
@@ -33,6 +34,19 @@ pinMode(antenna_pin,OUTPUT);
 digitalWrite(antenna_pin,HIGH);
 
 
+}
+
+double generate_x(double t){
+    double num, denom;
+    if(isFro){
+        num = PI * (theta_min + (t/50) - theta_R);
+        denom = 1.15 * theta_BW;
+    }else{
+        num = PI * (theta_max - (t/50) - theta_R);
+        denom = 1.15 * theta_BW;
+    }
+    return num/denom;
+    
 }
 
 void loop(){
