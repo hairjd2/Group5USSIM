@@ -3,15 +3,18 @@ int transDataSDA = 26;
 int Atype2 = 13;
 int Atype1 = 12; // seems to be negated
 int Atype0 = 11;
-int Stype1 = 10;
-int Stype0 = 9;
-int startScanpin = 8;
+int TxEnpin = 10;
+int startScanpin = 9;
+int toFropin = 8;
 int DPSKpin = 7;
 
+int TxEn;
 int startScan;
 int DPSK;
 int Atype;
 int Stype;
+
+bool isFro = false;
 
 void setup() {
 // TODO: setup the pins we want to watch
@@ -33,15 +36,23 @@ void setPins() {
     pinMode(Atype2, INPUT);
     pinMode(Atype1, INPUT);
     pinMode(Atype0, INPUT);
-    pinMode(Stype1, INPUT);
-    pinMode(Stype0, INPUT);
+    pinMode(TxEn, INPUT);
     pinMode(startScanpin, INPUT);
+    pinMode(toFropin, INPUT);
     pinMode(DPSKpin, INPUT);
 }
 
 void checkPins() {
+    TxEn = digitalRead(TxEn);
     startScan = digitialRead(startScanpin);
     DPSK = digitalRead(DPSKpin);
+
+    if(digitalRead(toFropin) == HIGH) {
+        isFro = true;
+    }
+    else {
+        isFro = false;
+    }
 
     if(digitalRead(Atype2) == HIGH) {
         Atype = 4;
@@ -61,19 +72,4 @@ void checkPins() {
     else {
         Atype = 5;
     }
-
-    if(digitalRead(Stype1)  == HIGH && digitalRead(Stype0) == LOW) {
-        Stype = 2;
-    }
-    else if(digitalRead(Stype1)  == LOW && digitalRead(Stype0) == HIGH) {
-        Stype = 1;
-    }
-    else if(digitalRead(Stype1)  == LOW && digitalRead(Stype0) == LOW) {
-        Stype = 0;
-    }
-    else {
-        Stype = -1;
-    }
-
-
 }
