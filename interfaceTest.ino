@@ -1,21 +1,37 @@
-int transDataSCL = 27;
-int transDataSDA = 26;
-int Atype2 = 13;
-int Atype1 = 12; // seems to be negated
-int Atype0 = 11;
-int TxEnpin = 10;
-int startScanpin = 9;
-int toFropin = 8;
-int DPSKpin = 7;
+const int transDataSCL = 27;
+const int transDataSDA = 26;
+const int Atype2pin = 13;
+const int Atype1pin = 12; // seems to be negated
+const int Atype0pin = 11;
+const int TxEnpin = 10;
+const int startScanpin = 9;
+const int toFropin = 7;
+const int DPSKpin = 1;
+int ledPin = 2;
+
+int ledState = HIGH;
+int Atype2state;
+int Atype1state;
+int Atype0state;
+int TxEnState;
+int startScanState;
+int toFroState;
+int DPSKState;
 
 int TxEn;
 int startScan;
 int DPSK;
+int toFro;
+int Atype2;
+int Atype1;
+int Atype0;
 int Atype;
 int Stype;
 
 bool isFro = false;
 
+unsigned long lastDebounceTime = 0;
+unsigned long debounceDelay = 50;
 // int stationType[3][3] = {{-10, }, {-10, }, {3, }}
 
 void setup() {
@@ -33,45 +49,82 @@ void loop() {
 }
 
 void setPins() {
+    pinMode(ledPin, OUTPUT);
     pinMode(transDataSCL, OUTPUT);
     pinMode(transDataSDA, OUTPUT);
-    pinMode(Atype2, INPUT);
-    pinMode(Atype1, INPUT);
-    pinMode(Atype0, INPUT);
-    pinMode(TxEn, INPUT);
+    pinMode(Atype2pin, INPUT);
+    pinMode(Atype1pin, INPUT);
+    pinMode(Atype0pin, INPUT);
+    pinMode(TxEnpin, INPUT);
     pinMode(startScanpin, INPUT);
     pinMode(toFropin, INPUT);
     pinMode(DPSKpin, INPUT);
+
+    Atype2state = LOW;
+    Atype1state = LOW;
+    Atype0state = LOW;
+    TxEnState = LOW;
+    startScanState = LOW;
+    toFroState = LOW;
+    DPSKState = LOW;
+    digitalWrite(ledPin, ledState);
 }
 
 void checkPins() {
-    TxEn = digitalRead(TxEn);
-    startScan = digitialRead(startScanpin);
-    DPSK = digitalRead(DPSKpin);
+    debounce(TxEnpin, TxEn, TxEnState);
+    debounce(startScanpin, startScan, startScanState);
+    debounce(DPSKpin, DPSK, DPSKState);
 
-    if(digitalRead(toFropin) == HIGH) {
+    debounce(toFropin, toFro, toFroState);
+    if(toFro == HIGH) {
         isFro = true;
     }
     else {
         isFro = false;
     }
 
-    if(digitalRead(Atype2) == HIGH) {
+    debounce(Atype2pin, Atype2, Atype2state);
+    debounce(Atype1pin, Atype1, Atype1state);
+    debounce(Atype0pin, Atype0, Atype0state);
+
+    if(Atype2 == HIGH) {
         Atype = 4;
     }
-    else if(digitalRead(Atype1) == HIGH && digitalRead(Atype0) == HIGH) {
+    else if(Atype1 == HIGH && Atype0 == HIGH) {
         Atype = 3;
     }
-    else if(digitalRead(Atype1)  == HIGH && digitalRead(Atype0) == LOW) {
+    else if(Atype1  == HIGH && Atype0 == LOW) {
         Atype = 2;
     }
-    else if(digitalRead(Atype1)  == LOW && digitalRead(Atype0) == HIGH) {
+    else if(Atype1 == LOW && Atype0 == HIGH) {
         Atype = 1;
     }
-    else if(digitalRead(Atype1)  == LOW && digitalRead(Atype0) == LOW) {
+    else if(Atype1 == LOW && Atype0 == LOW) {
         Atype = 0;
     }
     else {
         Atype = 5;
     }
+}
+
+void debounce(int pin, int &state, int &lastState) {
+    int reading = digitalRead(pin);
+
+    if(reading != lastState) {
+        lastDebounceTime = millis();
+    }
+
+    if((millis() - lastDebounceTime) > debounceDelay) {
+        if(reading != state) {
+            state = reading;
+
+            if(state == HIGH) {
+                ledState = !ledState;
+            }
+        }
+    }
+
+    digitalWrite(ledPin, ledState);
+
+    lastState = reading;
 }

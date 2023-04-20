@@ -1,5 +1,7 @@
 {
     "board": "adafruit:samd:adafruit_itsybitsy_m0",
     "configuration": "opt=small,usbstack=arduino,debug=off",
-    "programmer": "adafruit:adafruit_jlink"
+    "programmer": "adafruit:adafruit_jlink",
+    "port": "COM3",
+    "sketch": "interfaceTest.ino"
 }
