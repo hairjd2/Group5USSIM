@@ -61,16 +61,24 @@ void generate_sinx(){
     {
         for(int i = 0; i < 616; i++){
             x = PI * ((theta_min + i/50) - theta_R) / (1.15*theta_BW);
-            temp =  (sin(x)/x) + 1.65;
-            temp = temp * pow(2, 12-1)/2;
-            sinx_x_to[i] = round(temp);
+            if(x == 0){
+                sinx_x_to[i] = 1;
+            }else{
+                temp =  (sin(x)/x) + 1.65;
+                temp = temp * pow(2, 12-1)/2;
+                sinx_x_to[i] = round(temp);
+            }
         }
     }else{
         for(int i = 0; i < 616; i++){
             x = PI * ((theta_max + i/50) - theta_R) / (1.15*theta_BW);
-            temp =  (sin(x)/x) + 1.65;
-            temp = temp * pow(2, 12-1)/2;
-            sinx_x_fro[i] = round(temp);
+            if(x == 0){
+                sinx_x_fro[i] = 1;
+            }else{
+                temp =  (sin(x)/x) + 1.65;
+                temp = temp * pow(2, 12-1)/2;
+                sinx_x_fro[i] = round(temp);
+            }
         }
     }
     
