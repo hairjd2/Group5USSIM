@@ -14,7 +14,7 @@ Adafruit_MCP4725 dac;
 const int ARRAY_SIZE = 256;
 const int NEGATION_MULTIPLIER = -1;
 const int QUARTER_DEGREE_VAL = 90;
-const double PI = 3.14159265;
+//const double PI = 3.14159265;
 const double WAVE_PERIOD = 615E-3;
 const int STRAIGHT_ANGLE = 180;
 const double FREQ = 1626.01626;
@@ -83,8 +83,6 @@ void generate_sinx(){
 void loop(){
     for(int i = 0; i < 616; i++){
         dac.setVoltage((sinx_x_to[i]*omega_t[i]*theta_A)/3.3, false);
+
     }
-
-    return 0;
-
 }
