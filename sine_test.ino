@@ -5,15 +5,15 @@
 #define DAC_ADDRESS 0x62 // MCP4725 I2C address
 
 Adafruit_MCP4725 dac;
-int theta_R = -10 * PI/180;
+double theta_R = -10 * PI/180;
 int SCAN_TO = 0;
-int theta_BW = 2* PI/180;
-int theta_min = -62* PI/180;
-int theta_max = 62* PI/180;
-int max_SINX;
-int min_SINX;
-int min_OMEGAT = sin(1626.01626 * 461.25 + (2*PI));
-int max_OMEGAT = sin(1626.01626 * 153.75 + (2*PI));
+double theta_BW = 2* PI/180;
+double theta_min = -62* PI/180;
+double theta_max = 62* PI/180;
+double max_SINX;
+double min_SINX;
+double min_OMEGAT = sin(1626.01626 * 461.25 + (2*PI));
+double max_OMEGAT = sin(1626.01626 * 153.75 + (2*PI));
 
 void setup() {
   Wire.begin();
