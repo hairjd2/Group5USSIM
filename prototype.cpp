@@ -79,6 +79,6 @@ double generate_wave(int scanTo, int t, double thetaT, double thetaR, double the
     }
 
     sinXoX = sin(x)/x;
-    wave = sinXoX * sin(1626.01626 * t * (2*M_PI));
+    wave = sinXoX * sin(1626.01626 * t + (2*M_PI));
     return wave;
 }
