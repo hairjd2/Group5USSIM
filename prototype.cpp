@@ -31,20 +31,23 @@ int main(){
     double wave;
     long waveLong;
     int mappedWave;
-    double sinXoXMax = generate_sinx(1, 1, -1.082, -0.1745, 0.034);
-    double sinXoXMin = generate_sinx(1, 0, -1.082, -0.1745, 0.034);
-    //long inMin = sinXoXMin * OMEGA_T_MIN * pow(10, 5);
-    //long inMax = sinXoXMax * OMEGA_T_MAX * pow(10, 5);
 
-    ofstream output("wave.txt");
+    ofstream output("Constant_Waves.txt");
+    
+    // To Scan AZ
+    //output << "{" << "\n";
 
     for (int i = 0; i < 616; i++){
-        wave = generate_wave(1, i, -1.082, -0.1745, 0.034);
+        wave = generate_wave(0, i, 1.082, -0.1745, 0.034);
         waveLong = wave * pow(10, 5);
-        mappedWave = map(waveLong, -0.342*pow(10, 5), 0.832*pow(10, 5), 0, 4095);
+        mappedWave = map(waveLong, -0.342*pow(10, 5), 0.832*pow(10, 5), 4095, 0);
         output << i << "\t";
-        output << mappedWave << "\n";
+        output << wave << "\n";
+        //output << mappedWave << "\n";
     }
+    //output << "};";
+
+    // 
 
     output.close();
     return 0;
