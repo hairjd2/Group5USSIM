@@ -1,0 +1,12 @@
+AZ = [
+	test,
+	test,
+	test,
+	test,
+	test,
+	test,
+	test,
+	test,
+	test,
+	test,
+]
