@@ -2,22 +2,23 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 DATAPOINTS = 61600
-OMEGA = 1626.01626
-THETAMIN = (-1.5 * np.pi) / 180
-THETAMAX = (29.5 * np.pi) / 180
-THETAR = (3 * np.pi) / 180
-THETABW = (1.5 * np.pi) / 180
-foundMin = -0.9501543569926
-foundMax = 0.9822969744156255
+OMEGA = 162.3376623376623
+THETAMIN = (-62 * np.pi) / 180
+THETAMAX = (62 * np.pi) / 180
+THETAR = (-10 * np.pi) / 180
+THETABW = (2 * np.pi) / 180
+foundMin = -0.7802738946877019
+foundMax = 0.7143435398977478
 VMIN = 0
 VMAX = 4095
 
 def genFile():
-    with open("txtfiles\EL.txt", 'w') as file:
-        file.write("EL = {\n")
-        for t in range(10000):
-            # newVal = str(calcSinx(t / 100))
-            newVal = str(mapFunc(calcSinx(t / 100), foundMin, foundMax, VMIN, VMAX))
+    with open("txtfiles\AZ.txt", 'w') as file:
+        tVals = np.arange(0, 100, 0.1)
+        file.write("AZ = {\n")
+        for t in tVals:
+            # newVal = str(calcSinx(t))
+            newVal = str(mapFunc(calcSinx(t), foundMin, foundMax, VMIN, VMAX))
             file.write(newVal + ",\n")
         file.write("}")
 
@@ -45,14 +46,14 @@ def calcSinxFro(t):
     return np.sinc(x) * np.sin(OMEGA * t)
 
 def mapFunc(x, inMin, inMax, outMin, outMax):
-    return (x - inMin) * (outMax - outMin) / (inMax - inMin) + outMin
+    return int((x - inMin) * (outMax - outMin) / (inMax - inMin) + outMin)
 
 def graphFile():
     x = []
     y = []
     count = 0.0
 
-    with open("txtfiles\EL.txt", 'r') as file:
+    with open("txtfiles\AZ.txt", 'r') as file:
         file.readline()
         value = ""
         while value != "}":
