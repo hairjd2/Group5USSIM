@@ -3,24 +3,24 @@ import matplotlib.pyplot as plt
 
 DATAPOINTS = 61600
 OMEGA = 162.3376623376623
-THETAMIN = (-62 * np.pi) / 180
-THETAMAX = (62 * np.pi) / 180
-THETAR = (-10 * np.pi) / 180
-THETABW = (2 * np.pi) / 180
-foundMin = -0.7802738946877019
-foundMax = 0.7143435398977478
+THETAMIN = (-1.5 * np.pi) / 180
+THETAMAX = (29.5 * np.pi) / 180
+THETAR = (3 * np.pi) / 180
+THETABW = (1.5 * np.pi) / 180
+foundMin = -0.9911155873732591
+foundMax = 0.8038443096599659
 VMIN = 0
 VMAX = 4095
 
 def genFile():
-    with open("txtfiles\AZ.txt", 'w') as file:
+    with open("txtfiles\EL.txt", 'w') as file:
         tVals = np.arange(0, 100, 0.1)
-        file.write("AZ = {\n")
+        file.write("double data[1000] = {\n")
         for t in tVals:
             # newVal = str(calcSinx(t))
             newVal = str(mapFunc(calcSinx(t), foundMin, foundMax, VMIN, VMAX))
             file.write(newVal + ",\n")
-        file.write("}")
+        file.write("};")
 
     with open("txtfiles\Test.txt", 'w') as file:
         file.write("EL = {\n")
@@ -53,12 +53,12 @@ def graphFile():
     y = []
     count = 0.0
 
-    with open("txtfiles\AZ.txt", 'r') as file:
+    with open("txtfiles\EL.txt", 'r') as file:
         file.readline()
         value = ""
-        while value != "}":
+        while value != "};":
             value = file.readline()
-            if value != "}":
+            if value != "};":
                 x.append(count)
                 count += 0.01
                 y.append(float(value[:-2]))
