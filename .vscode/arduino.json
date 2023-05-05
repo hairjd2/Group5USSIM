@@ -3,5 +3,5 @@
     "configuration": "opt=small,usbstack=arduino,debug=off",
     "programmer": "adafruit:adafruit_jlink",
     "port": "COM3",
-    "sketch": "testRun\\sine_test.ino"
+    "sketch": "testRun\\interfaceTest.ino"
 }

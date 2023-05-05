@@ -15,7 +15,7 @@ VMAX = 4095
 def genFile():
     with open("txtfiles\EL.txt", 'w') as file:
         tVals = np.arange(0, 100, 0.1)
-        file.write("double data[1000] = {\n")
+        file.write("int data[1000] = {\n")
         for t in tVals:
             # newVal = str(calcSinx(t))
             newVal = str(mapFunc(calcSinx(t), foundMin, foundMax, VMIN, VMAX))
