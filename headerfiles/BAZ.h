@@ -1,3 +1,6 @@
+#ifndef BAZ_h
+#define BAZ_h
+
 int data[1000] = {
 1907,
 1916,
@@ -1000,3 +1003,5 @@ int data[1000] = {
 1906,
 1911,
 };
+
+#endif

@@ -1,3 +1,6 @@
+#ifndef AZ_h
+#define AZ_h
+
 int data[1000] = {
 2137,
 2135,
@@ -1000,3 +1003,5 @@ int data[1000] = {
 2138,
 2132,
 };
+
+#endif

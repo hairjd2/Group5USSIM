@@ -1,7 +1,7 @@
 #include <Wire.h>
 #include <Adafruit_MCP4725.h>
 #include <math.h>
-#include "EL.h"
+#include "AZ.h"
 
 #define DAC_ADDRESS 0x62 // MCP4725 I2C address
 
@@ -67,26 +67,6 @@ double generate_wave(float t){
 }
 
 void loop() {
-  // for (int t = 0; t < 10000; t++) { // generate a full sine wave cycle
-  //   double sinValue = generate_wave(t); // calculate sine wave value
-  //   sinValue *= pow(10, 5);
-  //   //sinValue += 1;
-  //   int newSinValue = (int)sinValue;
-  //   if (t == 154){
-  //     Serial.println(t);
-  //     Serial.println(sinValue);
-  //   }
-  //   // Serial.println(min_SINX);
-  //   // Serial.println(max_SINX);
-  //   // Serial.println(min_OMEGAT);
-  //   // Serial.println(max_OMEGAT);
-  //   int dacValue = map(sinValue, min_SINX * min_OMEGAT * pow(10,5), max_SINX * max_OMEGAT * pow(10,5), -2047, 2047) / 10; // convert to DAC value
-  //   dacValue = dacValue * 10 + 2047;
-  //   //Serial.println(dacValue);
-  //   dac.setVoltage(dacValue, false); // send DAC value
-  //   delayMicroseconds(1000); // wait for DAC to settle
-  // }
-
   for(int i = 0; i < 1000; i++) {
     int dacValue = int(data[i]);
 
