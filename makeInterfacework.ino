@@ -12,7 +12,7 @@ void setup() {
     dac.begin(DAC_ADDRESS);
     dac.setVoltage(0, false);
     pinMode(TxEnpin, INPUT);
-    i = 0;
+    i = 30;
     Serial.begin(9600);
     delay(25);
 }
