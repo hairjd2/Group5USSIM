@@ -49,8 +49,6 @@ void setup() {
     i = 0;
     j = 0;
 
-    Serial.println(j);
-
     Wire.begin();
     dac.begin(DAC_ADDRESS);
     dac.setVoltage(0, false); // set initial DAC output to 0V
@@ -93,7 +91,6 @@ void loop() {
                 i -= 1;
             }
         }
-        
     }
 
     j++;
