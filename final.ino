@@ -54,37 +54,37 @@ void setup() {
 
 void loop() {
     if(digitalRead(Atype2pin) == HIGH && digitalRead(Atype0pin) == LOW) {
-        if(Atype == 4) {
+        if(Atype != 4) {
             i = 0;
         }
         Atype = 4;
     }
     else if(digitalRead(Atype1pin) == HIGH && digitalRead(Atype0pin) == HIGH) {
-        if(Atype == 3) {
+        if(Atype != 3) {
             i = 0;
         }
         Atype = 3;
     }
     else if(digitalRead(Atype1pin)  == HIGH && digitalRead(Atype0pin) == LOW) {
-        if(Atype == 2) {
+        if(Atype != 2) {
             i = 0;
         }
         Atype = 2;
     }
     else if(digitalRead(Atype2pin) == LOW && digitalRead(Atype1pin) == LOW && digitalRead(Atype0pin) == HIGH) {
-        if(Atype == 1) {
+        if(Atype != 1) {
             i = 0;
         }
         Atype = 1;
     }
     else if(digitalRead(Atype1pin) == LOW && digitalRead(Atype0pin) == LOW) {
-        if(Atype == 0) {
+        if(Atype != 0) {
             i = 0;
         }
         Atype = 0;
     }
     else {
-        if(Atype == 5) {
+        if(Atype != 5) {
             i = 0;
         }
         Atype = 5;
@@ -92,19 +92,19 @@ void loop() {
 
     Serial.println(digitalRead(TxEnpin));
 
-    if(Atype == 0 && TxEnpin == HIGH) {
+    if(Atype == 0 && digitalRead(TxEnpin) == HIGH) {
         dac.setVoltage(data[i], false);
     }
-    else if(Atype == 1 && TxEnpin == HIGH) {
+    else if(Atype == 1 && digitalRead(TxEnpin) == HIGH) {
         dac.setVoltage(left[i], false);
     }
-    else if(Atype == 2 && TxEnpin == HIGH) {
+    else if(Atype == 2 && digitalRead(TxEnpin) == HIGH) {
         dac.setVoltage(upper[i], false);
     }
-    else if(Atype == 3 && TxEnpin == HIGH) {
+    else if(Atype == 3 && digitalRead(TxEnpin) == HIGH) {
         dac.setVoltage(right[i], false);
     }
-    else if(Atype == 4 && TxEnpin == HIGH) {
+    else if(Atype == 4 && digitalRead(TxEnpin) == HIGH) {
         dac.setVoltage(scanData[i], false);
     }
     else {
@@ -112,7 +112,7 @@ void loop() {
     }
 
     if (digitalRead(TxEnpin) == HIGH) {
-        if(Atype = 4) {
+        if(Atype == 4) {
             if(digitalRead(toFropin) == LOW) {
                 i += 1;
                 i %= scanLength;
@@ -125,7 +125,7 @@ void loop() {
                 }
             }
         }
-        else if(Atype = 0) {
+        else if(Atype == 0) {
             if (digitalRead(DPSKpin) != currDPSK)
             {
                 i += length/2;

@@ -7,10 +7,10 @@ THETAMIN = (-62 * np.pi) / 180
 THETAMAX = (62 * np.pi) / 180
 THETAR = (-10 * np.pi) / 180
 THETABW = (2 * np.pi) / 180
-foundMin = -0.125
-foundMax = 0.125
-VMIN = 2047 - (205 * 0.125)
-VMAX = 2047 + (205 * 0.125)
+foundMin = -1
+foundMax = 1
+VMIN = 2047 - 205
+VMAX = 2047 + 205
 
 def genFile():
     with open("txtfiles\AZ.txt", 'w') as file:
@@ -37,9 +37,11 @@ def graphFile():
     x = []
     y = []
     y2 = []
+    y3 = []
+    y4 = []
     count = 0.0
 
-    with open("txtfiles\data3.txt", 'r') as file:
+    with open("txtfiles\data.txt", 'r') as file:
         file.readline()
         value = ""
         while value != "};":
@@ -49,13 +51,29 @@ def graphFile():
                 count += 0.01
                 y.append(float(value[:-2]))
 
-    with open("txtfiles\data4.txt", 'r') as file:
+    with open("txtfiles\data2.txt", 'r') as file:
         file.readline()
         value = ""
         while value != "};":
             value = file.readline()
             if value != "};":
                 y2.append(float(value[:-2]))
+
+    with open("txtfiles\data3.txt", 'r') as file:
+        file.readline()
+        value = ""
+        while value != "};":
+            value = file.readline()
+            if value != "};":
+                y3.append(float(value[:-2]))
+
+    with open("txtfiles\data4.txt", 'r') as file:
+        file.readline()
+        value = ""
+        while value != "};":
+            value = file.readline()
+            if value != "};":
+                y4.append(float(value[:-2]))
         
         # newY = []
         # for val in y:
@@ -70,16 +88,18 @@ def graphFile():
     plt.figure()
     plt.plot(x, y)
     plt.plot(x, y2)
+    plt.plot(x, y3)
+    plt.plot(x, y4)
     plt.axhline(y=2047, xmin=np.min(x), xmax=np.max(x))
     plt.show()
 
 def genCosFile():
-    with open("txtfiles\data4.txt", 'w') as file:
+    with open("txtfiles\data.txt", 'w') as file:
         tVals = np.arange(0, 2*np.pi, 0.01)
-        file.write("int data4[629] = {\n")
+        file.write("int data[629] = {\n")
         for t in tVals:
             # newVal = str(calcSinx(t))
-            newVal = str(mapFunc(np.cos(t) * 0.125, foundMin, foundMax, VMIN, VMAX))
+            newVal = str(mapFunc(np.cos(t), foundMin, foundMax, VMIN, VMAX))
             file.write("\t" + newVal + ",\n")
         file.write("};")
 
