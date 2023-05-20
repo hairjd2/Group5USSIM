@@ -1,5 +1,5 @@
-#ifndef LEFT_OCI_h
-#define LEFT_OCI_h
+#ifndef UPPER_OCI_h
+#define UPPER_OCI_h
 
 int upper[629] = {
 	2098,

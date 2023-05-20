@@ -1,5 +1,5 @@
-#ifndef LEFT_OCI_h
-#define LEFT_OCI_h
+#ifndef RIGHT_OCI_h
+#define RIGHT_OCI_h
 
 int data4[629] = {
 	2072,

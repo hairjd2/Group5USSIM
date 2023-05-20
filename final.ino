@@ -32,10 +32,12 @@ Adafruit_MCP4725 dac;
 unsigned long lastDebounceTime = 0;
 unsigned long debounceDelay = 50;
 int scanLength = 1000;
+int length;
 
 void setup() {
     int Atype = 5;
     i = 0;
+    length = 629;
 
     pinMode(transDataSCL, OUTPUT);
     pinMode(transDataSDA, OUTPUT);
@@ -121,10 +123,10 @@ void loop() {
             {
                 i += length/2;
                 i %= length;
-                i +=1;
+                i += 1;
                 i %= length;
             }else{
-                i +=1;
+                i += 1;
                 i %= length;
             }
         
