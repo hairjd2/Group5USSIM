@@ -1,3 +1,6 @@
+#ifndef DATA_h
+#define DATA_h
+
 int data[629] = {
 	2252,
 	2251,
@@ -629,3 +632,5 @@ int data[629] = {
 	2251,
 	2251,
 };
+
+#endif

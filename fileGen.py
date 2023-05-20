@@ -7,10 +7,10 @@ THETAMIN = (-62 * np.pi) / 180
 THETAMAX = (62 * np.pi) / 180
 THETAR = (-10 * np.pi) / 180
 THETABW = (2 * np.pi) / 180
-foundMin = -1
-foundMax = 1
-VMIN = 0
-VMAX = 4095
+foundMin = -0.125
+foundMax = 0.125
+VMIN = 2047 - (205 * 0.125)
+VMAX = 2047 + (205 * 0.125)
 
 def genFile():
     with open("txtfiles\AZ.txt", 'w') as file:
@@ -36,9 +36,10 @@ def mapFunc(x, inMin, inMax, outMin, outMax):
 def graphFile():
     x = []
     y = []
+    y2 = []
     count = 0.0
 
-    with open("txtfiles\data.txt", 'r') as file:
+    with open("txtfiles\data3.txt", 'r') as file:
         file.readline()
         value = ""
         while value != "};":
@@ -47,27 +48,38 @@ def graphFile():
                 x.append(count)
                 count += 0.01
                 y.append(float(value[:-2]))
+
+    with open("txtfiles\data4.txt", 'r') as file:
+        file.readline()
+        value = ""
+        while value != "};":
+            value = file.readline()
+            if value != "};":
+                y2.append(float(value[:-2]))
         
-        newY = []
-        for val in y:
-            newY.append(val * 0.75)
+        # newY = []
+        # for val in y:
+        #     if(val > 2047):
+        #         newY.append(val * 0.5)
+        #     elif(val < 2047):
+        #         newY.append(val * 2)
+        #     else:
+        #         newY.append(val)
     
     # print(y)
     plt.figure()
     plt.plot(x, y)
-    plt.plot(x, newY)
-    plt.ylim(0, 4095)
-    print("Min value:", np.min(y))
-    print("Max value:", np.max(y))
+    plt.plot(x, y2)
+    plt.axhline(y=2047, xmin=np.min(x), xmax=np.max(x))
     plt.show()
 
 def genCosFile():
-    with open("txtfiles\data.txt", 'w') as file:
+    with open("txtfiles\data4.txt", 'w') as file:
         tVals = np.arange(0, 2*np.pi, 0.01)
-        file.write("int data[1000] = {\n")
+        file.write("int data4[629] = {\n")
         for t in tVals:
             # newVal = str(calcSinx(t))
-            newVal = str(((mapFunc(np.cos(t), foundMin, foundMax, VMIN, VMAX)) // 10) + 2047 - 204.5)
+            newVal = str(mapFunc(np.cos(t) * 0.125, foundMin, foundMax, VMIN, VMAX))
             file.write("\t" + newVal + ",\n")
         file.write("};")
 

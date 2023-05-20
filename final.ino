@@ -228,42 +228,43 @@ void loop() {
       Serial.println("Reached loop and TxEn");
         if (digitalRead(toFropin)==LOW)
         {
-        if (digitalRead(DPSKpin)==HIGH)
-        {
-            i += length/2;
-            i %= length;
-            dac.setVoltage(data[i], false);
-            i +=1;
-            i %= length;
-        }else{
-            dac.setVoltage(data[i], false);
-            i +=1;
-            i %= length;
-        }
+            if (digitalRead(DPSKpin)==HIGH)
+            {
+                i += length/2;
+                i %= length;
+                dac.setVoltage(data[i], false);
+                i +=1;
+                i %= length;
+            }else{
+                dac.setVoltage(data[i], false);
+                i +=1;
+                i %= length;
+            }
         
-    }else{
-        if (digitalRead(DPSKpin)==HIGH)
+        } else 
         {
-            if (i - length/2 < 0){
-                i = length - (length/2 - i);
+            if (digitalRead(DPSKpin)==HIGH)
+            {
+                if (i - length/2 < 0){
+                    i = length - (length/2 - i);
+                }else{
+                    i -= length/2;
+                }
+                dac.setVoltage(data[i], false);
+                if (i - 1 < 0){
+                    i = length - 1;
+                }else{
+                    i -= 1;
+                }
             }else{
-                i -= length/2;
-            }
-            dac.setVoltage(data[i], false);
-            if (i - 1 < 0){
-                i = length - 1;
-            }else{
-                i -= 1;
-            }
-        }else{
-            dac.setVoltage(data[i], false);
-            if (i - 1 < 0){
-                i = length - 1;
-            }else{
-                i -= 1;
+                dac.setVoltage(data[i], false);
+                if (i - 1 < 0){
+                    i = length - 1;
+                }else{
+                    i -= 1;
+                }
             }
         }
-    }
     }
 
     j++;
