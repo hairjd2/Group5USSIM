@@ -1,7 +1,7 @@
 #ifndef EL_h
 #define EL_h
 
-int data[1000] = {
+int scanData[1000] = {
 2261,
 2263,
 2209,
