@@ -17,14 +17,9 @@ const int startScanpin = 9;
 const int toFropin = 7;
 const int DPSKpin = 1;
 
-bool TxEn;
-int startScan;
-bool DPSK;
-int toFro;
 int Atype;
-int Stype;
 int i;
-int j;
+int currDPSK;
 
 bool isFro = false;
 Adafruit_MCP4725 dac;
@@ -35,7 +30,8 @@ int scanLength = 1000;
 int length;
 
 void setup() {
-    int Atype = 5;
+    currDPSK = LOW;
+    Atype = 5;
     i = 0;
     length = 629;
 
@@ -130,12 +126,13 @@ void loop() {
             }
         }
         else if(Atype = 0) {
-            if (digitalRead(DPSKpin) == HIGH)
+            if (digitalRead(DPSKpin) != currDPSK)
             {
                 i += length/2;
                 i %= length;
                 i += 1;
                 i %= length;
+                currDPSK = digitalRead(DPSKpin);
             } else {
                 i += 1;
                 i %= length;
