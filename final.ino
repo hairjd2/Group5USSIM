@@ -31,7 +31,7 @@ int length;
 
 void setup() {
     currDPSK = LOW;
-    Atype = 5;
+    Atype = 2;
     i = 0;
     length = 629;
 
@@ -90,10 +90,49 @@ void loop() {
         Atype = 5;
     }
 
-    Serial.println(digitalRead(TxEnpin));
+    // for(int i = 0; i < length; i++){
+    //    dac.setVoltage(data[i], false);
+    // }
 
-    if(Atype == 0 && digitalRead(TxEnpin) == HIGH) {
+    // for(int i = 0; i < 100; i++){
+    //    dac.setVoltage(0, false);
+    // }
+
+    // for(int i = 0; i < length; i++){
+    //    dac.setVoltage(left[i], false);
+    // }
+
+    //  for(int i = 0; i < 100; i++){
+    //    dac.setVoltage(0, false);
+    // }
+
+    // for(int i = 0; i < length; i++){
+    //    dac.setVoltage(upper[i], false);
+    // }
+
+    //  for(int i = 0; i < 100; i++){
+    //    dac.setVoltage(0, false);
+    // }
+
+    // for(int i = 0; i < length; i++){
+    //    dac.setVoltage(right[i], false);
+    // }
+
+    // for(int i = 0; i < 100; i++){
+    //    dac.setVoltage(0, false);
+    // }
+
+    // for(int i = 0; i < scanLength; i++){
+    //    dac.setVoltage(scanData[i], false);
+    // }
+
+    // Serial.println(Atype);
+
+    //if(Atype == 0 && digitalRead(TxEnpin) == HIGH) {
+    if(Atype == 0){
+        //Serial.println(data[i]);
         dac.setVoltage(data[i], false);
+        //Serial.println(i);
     }
     else if(Atype == 1 && digitalRead(TxEnpin) == HIGH) {
         dac.setVoltage(left[i], false);
@@ -109,9 +148,13 @@ void loop() {
     }
     else {
         dac.setVoltage(2047, false);
+        //dac.setVoltage(data[i], false);
     }
 
-    if (digitalRead(TxEnpin) == HIGH) {
+    //Serial.println(Atype);
+    
+    //if (digitalRead(TxEnpin) == HIGH) {
+      if (1 == 1){
         if(Atype == 4) {
             if(digitalRead(toFropin) == LOW) {
                 i += 1;
@@ -124,22 +167,25 @@ void loop() {
                     i -= 1;
                 }
             }
+          delayMicroseconds(620);
         }
         else if(Atype == 0) {
+          //Serial.println("Reached Atype 0 if statement");
             if (digitalRead(DPSKpin) != currDPSK)
-            {
+            {              
                 i += length/2;
                 i %= length;
-                i += 1;
+                i += 10;
                 i %= length;
                 currDPSK = digitalRead(DPSKpin);
             } else {
-                i += 1;
+              //Serial.println(i);
+                i += 10;
                 i %= length;
             }
         }
         else {
-            i += 1;
+            i += 10;
             i %= length;
         }
     }
