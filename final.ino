@@ -51,7 +51,7 @@ void setup() {
 }
 
 void loop() {
-    if(digitalRead(Atype2pin) == HIGH && digitalRead(Atype2pin) == LOW) {
+    if(digitalRead(Atype2pin) == HIGH && digitalRead(Atype0pin) == LOW) {
         if(Atype == 4) {
             i = 0;
         }
@@ -69,7 +69,7 @@ void loop() {
         }
         Atype = 2;
     }
-    else if(digitalRead(Atype1pin) == LOW && digitalRead(Atype0pin) == HIGH) {
+    else if(digitalRead(Atype2pin) == LOW && digitalRead(Atype1pin) == LOW && digitalRead(Atype0pin) == HIGH) {
         if(Atype == 1) {
             i = 0;
         }
