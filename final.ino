@@ -1,6 +1,10 @@
 #include <Wire.h>
 #include <Adafruit_MCP4725.h>
 #include "AZ.h"
+#include "DATA.h"
+#include "LEFT_OCI.h"
+#include "RIGHT_OCI.h"
+#include "UPPER_OCI.h"
 #define DAC_ADDRESS 0x62
 
 const int transDataSCL = 27;
