@@ -115,42 +115,35 @@ void loop() {
         dac.setVoltage(2047, false);
     }
 
-    if (digitalRead(TxEnpin) == HIGH){
-      Serial.println("Reached loop and TxEn");
-        if (digitalRead(toFropin)==LOW)
-        {
-            if (digitalRead(DPSKpin)==HIGH)
+    if (digitalRead(TxEnpin) == HIGH) {
+        if(Atype = 4) {
+            if(digitalRead(toFropin) == LOW) {
+                i += 1;
+                i %= scanLength;
+            }
+            else {
+                if (i - 1 < 0){
+                    i = scanLength - 1;
+                }else{
+                    i -= 1;
+                }
+            }
+        }
+        else if(Atype = 0) {
+            if (digitalRead(DPSKpin) == HIGH)
             {
                 i += length/2;
                 i %= length;
                 i += 1;
                 i %= length;
-            }else{
+            } else {
                 i += 1;
                 i %= length;
             }
-        
-        } else 
-        {
-            if (digitalRead(DPSKpin)==HIGH)
-            {
-                if (i - length/2 < 0){
-                    i = length - (length/2 - i);
-                }else{
-                    i -= length/2;
-                }
-                if (i - 1 < 0){
-                    i = length - 1;
-                }else{
-                    i -= 1;
-                }
-            }else{
-                if (i - 1 < 0){
-                    i = length - 1;
-                }else{
-                    i -= 1;
-                }
-            }
+        }
+        else {
+            i += 1;
+            i %= length;
         }
     }
 }
