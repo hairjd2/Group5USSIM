@@ -51,7 +51,7 @@ void setup() {
 }
 
 void loop() {
-    if(digitalRead(Atype2pin) == HIGH) {
+    if(digitalRead(Atype2pin) == HIGH && digitalRead(Atype2pin) == LOW) {
         if(Atype == 4) {
             i = 0;
         }
@@ -133,14 +133,12 @@ void loop() {
                 }else{
                     i -= length/2;
                 }
-                dac.setVoltage(data[i], false);
                 if (i - 1 < 0){
                     i = length - 1;
                 }else{
                     i -= 1;
                 }
             }else{
-                dac.setVoltage(data[i], false);
                 if (i - 1 < 0){
                     i = length - 1;
                 }else{
